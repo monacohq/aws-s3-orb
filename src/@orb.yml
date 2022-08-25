@@ -6,7 +6,7 @@ description: >
 # This information will be displayed in the orb registry and is not mandatory.
 display:
   home_url: https://aws.amazon.com/s3/
-  source_url: https://github.com/CircleCI-Public/aws-s3-orb
+  source_url: https://github.com/monacohq/aws-s3-orb
 
 orbs:
   aws-cli: circleci/aws-cli@2.0

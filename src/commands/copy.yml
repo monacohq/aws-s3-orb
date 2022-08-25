@@ -23,11 +23,19 @@ parameters:
     type: env_var_name
     description: aws region override
     default: AWS_REGION
+  install-aws-cli:
+    description: |
+      Whether to install aws-cli
+    type: boolean
+    default: true
 steps:
-  - aws-cli/setup:
-      aws-access-key-id: << parameters.aws-access-key-id >>
-      aws-secret-access-key: << parameters.aws-secret-access-key >>
-      aws-region: << parameters.aws-region >>
+  - when:
+      condition: << parameters.install-aws-cli >>
+      steps:
+        - aws-cli/setup:
+            aws-access-key-id: << parameters.aws-access-key-id >>
+            aws-secret-access-key: << parameters.aws-secret-access-key >>
+            aws-region: << parameters.aws-region >>
   - run:
       name: S3 Copy << parameters.from >> -> << parameters.to >>
       command: "aws s3 cp << parameters.from >> << parameters.to >><<# parameters.arguments >> << parameters.arguments >><</ parameters.arguments >>"
